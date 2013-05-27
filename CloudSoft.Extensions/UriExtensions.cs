@@ -14,7 +14,7 @@ namespace CloudSoft.Extensions
 				return null;
 			}
 			var result = new System.Collections.Specialized.NameValueCollection();
-			var query = uri.Query.Split('&');
+			var query = uri.Query.Trim('?').Trim().Split('&');
 			foreach (var part in query)
 			{
 				var nv = part.Split('=');
