@@ -12,7 +12,7 @@ namespace CloudSoft.Extensions
 		{
 			var typeParams = new ParameterExpression[] { Expression.Parameter(typeof(T), "") };
 
-			var pi = typeof(T).GetProperty(memberName);
+			var pi = typeof(T).GetProperty(memberName, System.Reflection.BindingFlags.IgnoreCase);
 
 			return (IOrderedQueryable<T>)query.Provider.CreateQuery(
 				Expression.Call(
@@ -28,7 +28,7 @@ namespace CloudSoft.Extensions
 		{
 			var typeParams = new ParameterExpression[] { Expression.Parameter(typeof(T), "") };
 
-			var pi = typeof(T).GetProperty(memberName);
+			var pi = typeof(T).GetProperty(memberName, System.Reflection.BindingFlags.IgnoreCase);
 
 			return (IOrderedQueryable<T>)query.Provider.CreateQuery(
 				Expression.Call(
