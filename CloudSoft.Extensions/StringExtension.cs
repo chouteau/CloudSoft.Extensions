@@ -392,16 +392,16 @@ namespace CloudSoft.Extensions
 			return result.Trim();
 		}
 
-        public static string ToHtmlAttribute(this string input)
-        {
-            if (input == null)
-            {
-                return null;
-            }
+		public static string ToHtmlAttribute(this string input)
+		{
+			if (input == null)
+			{
+				return null;
+			}
 			input = input.Replace("\"", "&#34;");
 			input = input.Replace(System.Environment.NewLine, "");
 			return input;
-        }
+		}
 
 		public static string RemoveIllegalXmlChar(this string input)
 		{
