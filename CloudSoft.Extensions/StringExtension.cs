@@ -542,6 +542,15 @@ namespace CloudSoft.Extensions
 			return input;
 		}
 
-
+		/// <summary>
+		/// Indique si 2 chaines de caractères sont identiques in ignorant les majuscules
+		/// </summary>
+		/// <param name="input"></param>
+		/// <param name="value"></param>
+		/// <returns></returns>
+		public static bool IgnoreCaseEquals(this string input, string value)
+		{
+			return input.Equals(value, StringComparison.InvariantCultureIgnoreCase);
+		}
 	}
 }
