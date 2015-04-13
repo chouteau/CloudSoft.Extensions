@@ -286,13 +286,9 @@ namespace CloudSoft.Extensions
 			var lastSpace = result.LastIndexOf(' ');
 			if (lastSpace == -1)
 			{
-				lastSpace = Math.Max(length, result.Length);
+				lastSpace = Math.Min(length, result.Length);
 			}
 			var continuous = " ...";
-			if (!continuousHref.IsNullOrTrimmedEmpty())
-			{
-				continuous = "<a href=\"" + continuousHref + "\">" + continuous + "</a>";
-			}
 			return result.Substring(0, lastSpace) + continuous;
 		}
 

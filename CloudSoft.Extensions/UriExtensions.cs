@@ -26,9 +26,9 @@ namespace CloudSoft.Extensions
 			return result;
 		}
 
-		public static int HostId(this Uri url)
+		public static int HostId(this Uri uri)
 		{
-			var host = url.Host;
+			var host = uri.Host;
 			host = host.ToLower(); // important
 			host = host.Replace("www.", "");
 
@@ -44,6 +44,43 @@ namespace CloudSoft.Extensions
 			}
 			return h;
 		}
+
+		public static int PathId(this Uri uri)
+		{
+			var localPath = uri.LocalPath;
+			localPath = localPath.ToLower(); // important
+
+			int h = 0, g = 0;
+			for (int i = localPath.Length - 1; i >= 0; i--)
+			{
+				int c = (int)localPath[i];
+				h = ((h << 6) & 0xfffffff) + c + (c << 14);
+				if ((g = h & 0xfe00000) != 0)
+				{
+					h = (h ^ (g >> 21));
+				}
+			}
+			return h;
+		}
+
+		public static int LinkId(this Uri uri)
+		{
+			var url = uri.ToString();
+			url = url.ToLower(); // important
+
+			int h = 0, g = 0;
+			for (int i = url.Length - 1; i >= 0; i--)
+			{
+				int c = (int)url[i];
+				h = ((h << 6) & 0xfffffff) + c + (c << 14);
+				if ((g = h & 0xfe00000) != 0)
+				{
+					h = (h ^ (g >> 21));
+				}
+			}
+			return h;
+		}
+
 
 	}
 }
