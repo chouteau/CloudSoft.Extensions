@@ -52,11 +52,13 @@ namespace CloudSoft.Extensions
 		/// <returns></returns>
 		public static string Left(this string value, int length)
 		{
-			if (value.IsNullOrTrimmedEmpty())
+			if (value.IsNullOrTrimmedEmpty()
+				|| length <= 0)
 			{
 				return value;
 			}
-			return value.Substring(0, Math.Min(length, value.Length));
+			var result = value.Substring(0, Math.Min(length, value.Length));
+			return result;
 		}
 
 		/// <summary>
@@ -67,7 +69,8 @@ namespace CloudSoft.Extensions
 		/// <returns></returns>
 		public static string Right(this string value, int length)
 		{
-			if (value.IsNullOrTrimmedEmpty())
+			if (value.IsNullOrTrimmedEmpty()
+				&& length <= 0)
 			{
 				return value;
 			}
@@ -173,6 +176,10 @@ namespace CloudSoft.Extensions
 		/// <returns></returns>
 		public static string GZipToBase64String(this string input)
 		{
+			if (input == null)
+			{
+				return null;
+			}
 			string result = null;
 			using (var ms = new System.IO.MemoryStream())
 			{
@@ -247,6 +254,10 @@ namespace CloudSoft.Extensions
 		/// <returns></returns>
 		public static string UnGZipFromBase64String(this string zippedinput)
 		{
+			if (zippedinput == null)
+			{
+				return null;
+			}
 			var buffer = Convert.FromBase64String(zippedinput);
 			return buffer.UnGZip();
 		}
