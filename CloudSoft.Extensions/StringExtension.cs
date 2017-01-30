@@ -559,5 +559,78 @@ namespace CloudSoft.Extensions
 		{
 			return input.Equals(value, StringComparison.InvariantCultureIgnoreCase);
 		}
+
+		public static string OverflowAt(this string input, int length, string continuous = " ...")
+		{
+			if (input.IsNullOrEmpty()
+				|| input.Length <= length)
+			{
+				return input;
+			}
+
+			var continuousLength = continuous.IsNullOrEmpty() ? 0 : continuous.Length;
+
+			var result = input.Substring(0, Math.Max(1, length - continuousLength));
+			var lastSpace = result.LastIndexOf(' ');
+			if (lastSpace == -1)
+			{
+				lastSpace = Math.Min(length, result.Length);
+			}
+			//var continuous = " ...";
+
+
+			return result.Substring(0, lastSpace) + continuous;
+		}
+
+		public static bool IsKeywordPresent(this string input, string keyword)
+		{
+			if (keyword.IsNullOrTrimmedEmpty())
+			{
+				return true;
+			}
+
+			if (false == input.ToLower().Contains(keyword.ToLower()))
+			{
+				return false;
+			}
+
+			if (input.Equals(keyword, StringComparison.InvariantCultureIgnoreCase))
+			{
+				return true;
+			}
+
+			var index = input.ToLower().IndexOf(keyword.ToLower());
+			if (index < 0)
+			{
+				return false;
+			}
+
+
+			if (index == 0)
+			{
+				var nextCharIndex = index + keyword.Length;
+
+				var nextChar = input[nextCharIndex].ToString();
+
+				return System.Text.RegularExpressions.Regex.IsMatch(nextChar, @"[^\w]");
+			}
+			else if ((index + keyword.Length) == input.Length)
+			{
+				var previousCharIndex = index - 1;
+				var previousChar = input[previousCharIndex].ToString();
+
+				return System.Text.RegularExpressions.Regex.IsMatch(previousChar, @"[^\w]");
+			}
+			else
+			{
+				var nextCharIndex = index + keyword.Length;
+				var nextChar = input[nextCharIndex].ToString();
+				var previousCharIndex = index - 1;
+				var previousChar = input[previousCharIndex].ToString();
+
+				return (System.Text.RegularExpressions.Regex.IsMatch(previousChar, @"[^\w]") && System.Text.RegularExpressions.Regex.IsMatch(nextChar, @"[^\w]"));
+			}
+		}
+
 	}
 }

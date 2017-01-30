@@ -225,24 +225,6 @@ namespace CloudSoft.Extensions
 			}
 		}
 
-		public static Dictionary<string, string> ToDictionary(this System.Collections.Specialized.NameValueCollection nvc)
-		{
-			var result = new Dictionary<string, string>();
-			foreach (var key in nvc.AllKeys)
-			{
-				result.Add(key, nvc[key]);
-			}
-			return result;
-		}
-
-		public static string GetValueOrDefault(this Dictionary<string, string> input, string key)
-		{
-			if (input.Keys.Contains(key))
-			{
-				return input[key];
-			}
-			return null;
-		}
 
 	}
 }
