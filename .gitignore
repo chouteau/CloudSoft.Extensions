@@ -108,3 +108,4 @@ Backup*/
 UpgradeLog*.XML
 
 nuget/
+/.vs/CloudSoft.Extensions/v15/sqlite3

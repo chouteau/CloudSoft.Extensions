@@ -42,6 +42,7 @@ namespace CloudSoft.Extensions
 		/// <typeparam name="T"></typeparam>
 		/// <param name="list">The list.</param>
 		/// <returns></returns>
+		[Obsolete("Use !IsNullOrEmpty instead", true)]
 		public static bool IsNotNullOrEmpty<T>(this IEnumerable<T> list)
 		{
 			return (list != null && list.Count() > 0);
